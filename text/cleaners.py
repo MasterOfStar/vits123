@@ -443,7 +443,13 @@ def korean_cleaners(text):
 
 
 def chinese_cleaners(text):
-  raise Exception("该笔记本已取消对于该cleaners的支持。你可以向其他相关领域人士继续寻求帮助。")
+  '''Pipeline for Chinese text'''
+  text=number_to_chinese(text)
+  text=chinese_to_bopomofo(text)
+  text=latin_to_bopomofo(text)
+  if re.match('[ˉˊˇˋ˙]',text[-1]):
+    text += '。'
+  return text
 
 
 def zh_ja_mixture_cleaners(text):
